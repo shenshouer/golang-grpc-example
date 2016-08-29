@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package api;
+
+message HeartBeatRequest {
+    string ClientID = 1;
+    string ClientIP = 2;
+    enum ClientType {
+        TypeWindows = 0;
+        TypeUbuntu = 1;
+        TypeAndrod = 2;
+    }
+}
+
+message HeartBeatResponse {
+    bool IsOk = 1;
+}
+
+service RPCServer {
+    rpc HeartBeat(HeartBeatRequest) returns (HeartBeatResponse){}
+    rpc Stream(stream HeartBeatRequest) returns(stream HeartBeatResponse){}
+}
